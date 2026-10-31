@@ -8,6 +8,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{graphicx}
+\usepackage[export]{adjustbox} % constrain tables to available line width
 \usepackage[hyphens]{url}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs,multirow}
@@ -17,6 +18,7 @@
 \usepackage{placeins}
 \usepackage{xcolor}
 \usepackage{caption}
+\setlength{\emergencystretch}{2em} % allow natural line breaks in long prose
 \usepackage{hyperref}
 \newcommand{\hx}[1]{\textcolor{red}{[HX: #1]}}
 \bibliographystyle{elsarticle-num}
@@ -301,6 +303,7 @@ We use MovieLens-1M (ML-1M), Amazon Beauty, and Amazon Sports. ML-1M is the prim
 \begin{table}[t]
 \centering
 \small
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrr}
 \toprule
 Dataset & Users & Items & Interactions & Density \\
@@ -310,6 +313,7 @@ Beauty & \textbf{22,363} & \textbf{12,101} & 198K & 0.07\% \\
 Sports & 21,519 & 10,693 & \(\sim\)178K & 0.08\% \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Dataset statistics. Item counts exclude the padding row. Density is
 defined as $|\mathcal{R}|/(|\mathcal{U}||\mathcal{I}|)$, where
 $\mathcal{R}$ is the set of observed interactions, $\mathcal{U}$ the users,
@@ -375,6 +379,7 @@ intervals appear in Appendix C.1.}
 \small
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{0.5}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrrrr}
 \toprule
 & \shortstack{User-weighted\\TargetInOutput@100} &
@@ -388,6 +393,7 @@ CQG-Single & \textbf{67.3\%} & \textbf{26.4\%} & \textbf{46.9\%} & \textbf{56.3\
 CQG-AR & 66.4\% & 24.4\% & 45.4\% & 54.8\% & 69.6\% & 78.8\% \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{ML-1M finite-output support (seed 42). Overall is user weighted;
 Q1--Q4 average distinct target items within training-frequency quartiles, and
 the final column is the fraction of distinct targets retrieved at least once
@@ -420,6 +426,7 @@ details are provided in Appendix D.
 \small
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{0.87}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{llrrrrr}
 \toprule
 Method & Config. & Trainable Params & \shortstack{ML-1M\\R@10} & \shortstack{ML-1M\\NDCG@10} & \shortstack{Beauty\\R@10} & \shortstack{Sports\\R@10} \\
@@ -430,6 +437,7 @@ CQG-Single & One-step & 3.2M & \textbf{0.3104 \(\pm\) 0.0047} & \textbf{0.1822 \
 CQG-AR & AR continuous (\(L=3\)) & 5.62M & 0.2976 \(\pm\) 0.0032 & 0.1735 \(\pm\) 0.0016 & 0.0571 \(\pm\) 0.0043 & 0.0355 \(\pm\) 0.0004 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 % \caption{Cross-dataset primary comparison. SASRec entries are single-checkpoint
 % full-rank baselines; TIGER, CQG-Single, and CQG-AR report mean $\pm$ sample SD.
 % ML-1M uses seven training seeds (42--48), whereas Beauty and Sports use three
@@ -668,6 +676,7 @@ Table~\ref{tab:faithful-coverage}.
 \small
 \setlength{\tabcolsep}{2.5pt}
 \renewcommand{\arraystretch}{0.87}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrr|rr|rr}
 \toprule
 Dataset &
@@ -683,6 +692,7 @@ Beauty & 74.4\% & 96.3\% & \textbf{89.5\%} & \textbf{99.9\%} & 87.9\% & 99.8\% \
 Sports & \textbf{94.0\%} & \textbf{99.5\%} & 63.1\% & 96.9\% & 71.8\% & 98.4\% \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Empirical union-of-Top-$K$ catalog coverage under matched
 returned-list sizes (seed 42). All methods use the same full-user sets
 and history filtering. Bold denotes the highest item coverage within each
@@ -697,6 +707,7 @@ dataset and cutoff.}
 \small
 \setlength{\tabcolsep}{6pt}
 \renewcommand{\arraystretch}{1.00}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrr}
 \toprule
 Depth & R@10 & NDCG@10 & R@100 \\
@@ -707,6 +718,7 @@ Depth & R@10 & NDCG@10 & R@100 \\
 \(L=4\) & \textbf{0.2944} & 0.1717 & \textbf{0.6697} \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Single-seed CQG-AR decoding-depth ablation on ML-1M. All rows use
 seed 42, full-catalog CE, and intermediate-loss weight 0.3. Within this
 controlled ablation recipe, additional continuous refinements do not yield a
@@ -719,6 +731,7 @@ intermediate-loss weight 0.}
 \begin{table}[!htbp]
 \centering
 \small
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrr}
 \toprule
 Catalog group & Coverage@100 & Std. \\
@@ -731,6 +744,7 @@ Q4 popular & \textbf{88.7\%} & 13.0\% \\
 Overall & 44.0\% & 13.7\% \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Empirical union-of-top-100 catalog coverage for the closer T5/RQ-VAE
 Beauty reproduction, averaged over decoder seeds 42--44. Bold denotes the
 highest quartile coverage.}
@@ -842,6 +856,7 @@ The comparison is against our TIGER-style baseline, not published TIGER.
 \small
 \begin{minipage}[t]{0.48\textwidth}
 \centering
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{llrr}
 \toprule
 \multicolumn{4}{c}{\textbf{Beauty}} \\
@@ -859,9 +874,11 @@ Seed & Method & R@10 & NDCG@10 \\
  & CQG-AR & 0.0573 & 0.0333 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{llrr}
 \toprule
 \multicolumn{4}{c}{\textbf{Sports}} \\
@@ -879,6 +896,7 @@ Seed & Method & R@10 & NDCG@10 \\
  & CQG-AR & 0.0359 & 0.0190 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{minipage}
 \caption{Complete Beauty and Sports seed-level results underlying the means
 and sample standard deviations in main-paper Table 3. Beauty and Sports use
@@ -916,6 +934,7 @@ identical random draws across architectures.
 \centering
 \small
 \setlength{\tabcolsep}{5pt}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrrrr}
 \toprule
 Seed & \multicolumn{2}{c}{TIGER} & \multicolumn{2}{c}{CQG-Single} &
@@ -935,6 +954,7 @@ Mean & 0.2996 & 0.1739 & \textbf{0.3104} & \textbf{0.1822} & 0.2976 & 0.1735 \\
 Sample SD & 0.0072 & 0.0046 & 0.0047 & 0.0044 & 0.0032 & 0.0016 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Seven-seed ML-1M results under valid-prefix constrained TIGER
 decoding. Each TIGER row uses the checkpoint reselected by constrained
 validation and evaluates all 6,040 test users with the same history filtering.
@@ -968,6 +988,7 @@ generation. These are fixed-checkpoint, not multi-seed, results.
 \centering
 \textbf{(a) Standalone and reranked accuracy}\\[2pt]
 \setlength{\tabcolsep}{2.2pt}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrr}
 \toprule
 Method & ML-1M & Beauty & Sports \\
@@ -989,11 +1010,13 @@ AR MSE + SASRec (s42) & .1543 & .0265 & .0194 \\
 TIGER + SASRec & \textbf{.1571} & -- & -- \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.36\textwidth}
 \centering
 \textbf{(b) Candidate hierarchy}\\[2pt]
 \setlength{\tabcolsep}{2.2pt}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrr}
 \toprule
 Generator & ML-1M & Sports \\
@@ -1006,6 +1029,7 @@ AR + SASRec & .2791 & .0378 \\
 SASRec full-rank & .2797 & \textbf{.0390} \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{minipage}
 \caption{Matched Top-100 MSE candidate-generation and reranking diagnostics.
 (a) Standalone and SASRec-reranked accuracy; CQG-AR uses the available
@@ -1025,6 +1049,7 @@ in each dataset and metric block.}
 \centering
 \small
 \setlength{\tabcolsep}{1.45pt}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{llrrrrrrrrrrrr}
 \toprule
 Quartile & Method & 10 & 20 & 30 & 40 & 50 & 60 & 70 & 80 & 90 & 100 & 120 & 150 \\
@@ -1046,6 +1071,7 @@ Q4 popular & Single & \textbf{.3555} & \textbf{.4754} & \textbf{.5479} & \textbf
 & TIGER & .3474 & .4612 & .5307 & .5834 & .6273 & .6509 & .6795 & .7023 & \textbf{.7208} & \textbf{.7335} & \textbf{.7619} & \textbf{.7896} \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Recall at the 12 depths in main-paper Figure~3, evaluated on the
 same 6,040 users using paired seed-42 checkpoints and matched Top-200
 outputs. This CQG-Single checkpoint has R@10 \(0.3063\), rather than
@@ -1079,7 +1105,7 @@ history after filtering are removed. Evaluation is full-catalog unless
 otherwise stated: the target item is ranked against all candidate items rather
 than against sampled negatives. Cross-dataset accuracy uses
 \(K\in\{5,10,20\}\); the ML-1M crossover curve uses the measured depths
-\(K\in\{10,20,30,40,50,60,70,80,90,100,120,150\}\).
+\(K\in\{10,20,\ldots,100,120,150\}\).
 
 \subsection{Evaluation Metrics}
 \label{app:metrics}
@@ -1262,6 +1288,7 @@ history and masking all previously observed items.
 \centering
 \small
 \setlength{\tabcolsep}{5pt}
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrr}
 \toprule
 Method & Item $d$ & Hidden & Layers & Heads \\
@@ -1276,9 +1303,11 @@ Qwen2.5-7B hybrid probe & 64 & 3584 & 28 & 28 \\
 TIGER-style SID decoder & 64 & 384 & 4 & 6 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 
 \vspace{4pt}
 
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrl}
 \toprule
 Method & LR & Batch & Epochs/Steps & Objective \\
@@ -1293,6 +1322,7 @@ Qwen2.5-7B hybrid probe & 5e-5 & 32$\times$8 & 10 & InfoNCE with projection head
 TIGER-style SID decoder & 1e-3 & 256 & 50K steps & Autoregressive CE over SID tokens \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Training hyperparameters for the three datasets. ``Hidden'' is the
 Transformer width; all continuous queries remain 64-dimensional. The
 Qwen2.5-7B probe uses its 3,584-dimensional, 28-layer, 28-attention-head
@@ -1398,6 +1428,7 @@ protocol.
 \begin{table}[htbp]
 \centering
 \small
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrr}
 \toprule
 Objective & R@10 & NDCG@10 & R@100 \\
@@ -1406,6 +1437,7 @@ Full-catalog CE & \textbf{0.2982 \(\pm\) 0.0042} & \textbf{0.1727 \(\pm\) 0.0020
 Sampled CE (256 negatives) & 0.2895 \(\pm\) 0.0077 & 0.1663 \(\pm\) 0.0034 & 0.6592 \(\pm\) 0.0104 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{ML-1M objective-visibility control (mean $\pm$ sample SD; seeds 42--44). Reducing catalog visibility to 256 sampled negatives lowers R@10 by 0.0087 but retains competitive accuracy, so objective visibility explains part, not all, of the continuous model's behavior.}
 \label{tab:objective-control}
 \end{table}
@@ -1420,6 +1452,7 @@ CE-joint is separate because it also changes the item representations.
 \begin{table}[htbp]
 \centering
 \small
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrr}
 \toprule
 Objective & Test R@10 & vs. SASRec \\
@@ -1433,6 +1466,7 @@ CQG-AR MSE & 0.2424 & 86.7\% \\
 CQG-AR InfoNCE & 0.2324 & 83.1\% \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Frozen-item objective landscape on ML-1M. CQG-Single CE/MSE and all
 CQG-AR rows are three-seed means under the corrected test-history protocol;
 CQG-Single InfoNCE is an auxiliary diagnostic.}
@@ -1447,6 +1481,7 @@ CQG-Single InfoNCE is an auxiliary diagnostic.}
 \begin{table}[!htbp]
 \centering
 \small
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lr}
 \toprule
 Objective & Test R@10 \\
@@ -1460,6 +1495,7 @@ CQG-AR CE, $\tau=0.10$ & 0.2886 \\
 CQG-AR CE, $\tau=0.20$ & 0.2725 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Temperature ablation on ML-1M under the corrected test-history
 protocol. CQG-Single values are three-seed means; CQG-AR values are aligned
 seed-42 controls. Lower temperatures improve shallow retrieval in the tested
@@ -1518,6 +1554,7 @@ decoupling. These are single-run diagnostics, not primary baselines.}
 \begin{table}[!htbp]
 \centering
 \small
+\begin{adjustbox}{max width=\linewidth}
 \begin{tabular}{lrrrrrr}
 \toprule
 Model & R@5 & R@10 & R@20 & R@50 & R@70 & R@90 \\
@@ -1526,6 +1563,7 @@ Model & R@5 & R@10 & R@20 & R@50 & R@70 & R@90 \\
 Qwen text-aware hybrid & 0.134 & 0.212 & 0.308 & 0.460 & 0.517 & 0.564 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \caption{Single-run recall curve comparison between the MSE-frozen scratch
 Transformer used in the LLM diagnostic and the best tested LLM hybrid
 configuration. The scratch row is not the three-seed CQG-Single MSE aggregate
