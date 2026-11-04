@@ -1,0 +1,5 @@
+- Finite-beam SID decoding can omit valid targets from returned candidate lists.
+- CQG-Single scores encoded items without discrete identifier decoding.
+- CQG-Single surpasses the TIGER-style baseline in seven ML-1M runs.
+- CQG-AR retains autoregressive refinement with continuous query outputs.
+- Additional refinement does not consistently improve shallow retrieval.

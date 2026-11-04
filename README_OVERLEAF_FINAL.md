@@ -1,3 +1,5 @@
+> **Neurocomputing version:** For journal compilation use `neurocomputing_submission.tex` and the current `README_NEUROCOMPUTING_SUBMISSION.md`. The following instructions document the retained AAAI originals only.
+
 # Final AAAI 2027 Overleaf Package
 
 Main file:
