@@ -28,5 +28,11 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: neurocomputing-manuscript-pdf
-          path: neurocomputing_submission.pdf
+          name: neurocomputing-pdf-and-source
+          path: |
+            neurocomputing_submission.pdf
+            neurocomputing_submission.tex
+            references.bib
+            Highlights.txt
+            README_NEUROCOMPUTING_SUBMISSION.md
+            Figures/
