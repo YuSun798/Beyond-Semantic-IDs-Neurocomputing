@@ -1,0 +1,32 @@
+name: Build Neurocomputing manuscript
+
+on:
+  push:
+    paths:
+      - 'neurocomputing_submission.tex'
+      - 'references.bib'
+      - 'Figures/**'
+      - '.github/workflows/neurocomputing.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out manuscript
+        uses: actions/checkout@v4
+      - name: Compile with pdfLaTeX, BibTeX and latexmk
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: neurocomputing_submission.tex
+          texlive_version: 2026
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+      - name: Upload manuscript PDF
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neurocomputing-manuscript-pdf
+          path: neurocomputing_submission.pdf
