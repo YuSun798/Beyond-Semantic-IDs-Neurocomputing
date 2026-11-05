@@ -161,6 +161,12 @@ carefully separating these quantities. In particular, a high unique-code rate
 does not imply that every target enters a user's beam, and a target-conditioned
 hit rate does not equal catalog coverage. Our experiments treat these as
 distinct diagnostics of a trained model and its search budget.
+As a methodological parallel outside recommendation, SciTaRC annotates
+scientific-table question-answering tasks with explicit reasoning plans to
+separate strategy formulation from execution failures
+\citep{wang2026scitarc}. Our analysis similarly decomposes evaluation
+outcomes, but targets SID code assignment, finite-beam support, and catalog
+coverage rather than scientific-table reasoning.
 
 \textbf{Vocabulary-free and continuous recommendation.}
 DiffuRec, DreamRec, and ContRec use diffusion or continuous latent generation
